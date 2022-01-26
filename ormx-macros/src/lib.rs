@@ -6,6 +6,8 @@ mod patch;
 mod table;
 mod utils;
 
+
+
 /// Derives [Table](trait.Table.html) and generates a struct for inserting rows and accessors
 /// to certain fields.
 ///

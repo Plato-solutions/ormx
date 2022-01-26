@@ -39,6 +39,12 @@ pub trait Backend: Sized + Clone {
         common::impl_table::<Self>(table)
     }
 
+    /// Generate an `impl cherry::Schema for <Table>` block
+    #[cfg(feature = "cherry")]
+    fn impl_schema(table: &Table<Self>) -> TokenStream {
+        common::impl_table::<Self>(table)
+    }
+
     /// Generate an `impl Delete for <Table>` block
     fn impl_delete(table: &Table<Self>) -> TokenStream {
         common::impl_delete::<Self>(table)

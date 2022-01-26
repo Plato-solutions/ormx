@@ -16,6 +16,7 @@ pub fn impl_table<B: Backend>(table: &Table<B>) -> TokenStream {
     let stream_all = stream_all(table, &column_list);
     let stream_all_paginated = stream_all_paginated::<B>(table, &column_list);
     let update = update::<B>(table);
+    let delete = delete::<B>(table);
 
     quote! {
         impl ormx::Table for #table_ident {
@@ -27,9 +28,12 @@ pub fn impl_table<B: Backend>(table: &Table<B>) -> TokenStream {
             #stream_all
             #stream_all_paginated
             #update
+            #delete
         }
     }
 }
+
+
 
 pub fn impl_delete<B: Backend>(table: &Table<B>) -> TokenStream {
     if !table.deletable {

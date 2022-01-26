@@ -14,6 +14,7 @@ proc-macro = true
 sqlite = []
 mysql = []
 postgres = []
+query = []
 
 [dependencies]
 itertools = "0.10"

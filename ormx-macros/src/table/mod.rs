@@ -12,6 +12,9 @@ use crate::{
 
 mod parse;
 
+#[cfg(feature = "query")]
+mod schema;
+
 pub struct Table<B: Backend> {
     pub ident: Ident,
     pub vis: Visibility,
@@ -116,7 +119,12 @@ impl Getter {
     }
 }
 
+#[cfg(feature = "query")]
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
+    derive_table(input)
+}
+
+pub fn derive_table(input: DeriveInput) -> Result<TokenStream> {
     let parsed = Table::try_from(&input)?;
 
     let impl_table = Implementation::impl_table(&parsed);
